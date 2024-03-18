@@ -1,12 +1,20 @@
 
+import { useState } from 'react'
 import './App.css'
 import Banner from './Components/Banner/Banner'
+import Cooks from './Components/Cooks/Cooks'
 import Footer from './Components/Footer/Footer'
 import Header from './Components/Header/Header'
-import Recipe from './Components/Recipe/Recipe'
+import Recipes from './Components/Recipes/Recipes'
+
 
 function App() {
-  
+  const [cooks, setCooks]=useState([]);
+
+  const handleAddCooks = recipe =>{
+    const newCooks = [...Cooks, recipe];
+    setCooks(newCooks);
+  }
 
   return (
     <>      
@@ -19,7 +27,11 @@ function App() {
         <p className='text-gray-700'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id iste repudiandae recusandae beatae aspernatur libero, sapiente optio quod.</p>  
       </div>
 
-      <Recipe></Recipe>      
+      <div className="flex flex-col md:flex-row gap-5">
+         <Recipes handleAddCooks={handleAddCooks}></Recipes> 
+         <Cooks cooks={cooks}></Cooks>
+      </div>
+           
     </main>    
     <Footer></Footer>
     </>
